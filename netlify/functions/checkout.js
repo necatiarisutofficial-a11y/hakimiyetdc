@@ -1,5 +1,5 @@
 module.exports = async (req, res) => {
-    // CORS izni (çok önemli)
+    // CORS
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
@@ -18,8 +18,8 @@ module.exports = async (req, res) => {
         const webhookUrl = 'https://discord.com/api/webhooks/1524078484933185647/cPTAl8I7aiIwbT2Rw6HqFt_TjI6OY9JxFNQNFZEkjDGaqRkuywqpOiyLfZdlaxv4SxWb';
 
         const embed = {
-            title: '🛒 Yeni Sipariş Talebi! @everyone',
-            color: 5192402,
+            title: '🛒 YENİ SİPARİŞ GELDİ!',
+            color: 16711680, // Kırmızı renk, daha dikkat çeksin
             timestamp: new Date().toISOString(),
             fields: [
                 { name: '👤 Müşteri', value: data.ad_soyad || 'Bilinmiyor', inline: true },
@@ -35,7 +35,10 @@ module.exports = async (req, res) => {
         await fetch(webhookUrl, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ embeds: [embed] })
+            body: JSON.stringify({
+                content: "@everyone **YENİ SİPARİŞ GELDİ!** 🔥",   // Burası @everyone atıyor
+                embeds: [embed]
+            })
         });
 
         res.status(200).json({ success: true });
