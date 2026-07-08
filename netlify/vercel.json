@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "functions/checkout.js",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/checkout",
+      "dest": "/functions/checkout.js"
+    }
+  ]
+}
