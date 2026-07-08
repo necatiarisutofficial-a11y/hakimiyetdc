@@ -1,6 +1,6 @@
 module.exports = async (req, res) => {
   try {
-    const data = JSON.parse(req.body);
+    const data = JSON.parse(req.body || '{}');
 
     const webhookUrl = 'https://discord.com/api/webhooks/1524078484933185647/cPTAl8I7aiIwbT2Rw6HqFt_TjI6OY9JxFNQNFZEkjDGaqRkuywqpOiyLfZdlaxv4SxWb';
 
@@ -27,6 +27,6 @@ module.exports = async (req, res) => {
     res.status(200).json({ success: true });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ success: false });
+    res.status(500).json({ success: false, error: error.message });
   }
 };
