@@ -1,6 +1,6 @@
-exports.handler = async (event) => {
+module.exports = async (req, res) => {
   try {
-    const data = JSON.parse(event.body);
+    const data = JSON.parse(req.body);
 
     const webhookUrl = 'https://discord.com/api/webhooks/1524078484933185647/cPTAl8I7aiIwbT2Rw6HqFt_TjI6OY9JxFNQNFZEkjDGaqRkuywqpOiyLfZdlaxv4SxWb';
 
@@ -24,15 +24,9 @@ exports.handler = async (event) => {
       body: JSON.stringify({ embeds: [embed] })
     });
 
-    return {
-      statusCode: 200,
-      body: JSON.stringify({ success: true })
-    };
+    res.status(200).json({ success: true });
   } catch (error) {
     console.error(error);
-    return {
-      statusCode: 500,
-      body: JSON.stringify({ success: false, error: error.message })
-    };
+    res.status(500).json({ success: false });
   }
 };
